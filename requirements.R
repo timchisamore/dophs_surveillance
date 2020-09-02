@@ -1,0 +1,6 @@
+library(tidyverse)
+library(drake)
+library(conflicted)
+conflict_prefer(name = "filter", winner = "dplyr")
+conflict_prefer(name = "lag", winner = "dplyr")
+dotenv::load_dot_env(file = here::here(".env"))

@@ -1,0 +1,3 @@
+This R project takes integrated Public Health Information System (iPHIS) data for the Diseases of Public Health Significance (DOPHS) and produces a surveillance report. This is in accordance with the Ministry of Health and Long-term Care (MOHLTC) requirements that municipal health units conduct this surveillance.
+
+Specifically, the surveillance report contains monthly and year-to-date counts for each disease in the current year. As well, a 5-year average and range of the year-to-date values from the previous years is included for reference.
