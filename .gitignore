@@ -7,5 +7,7 @@
 _drake.R
 miscellaneous
 archive
-documents
+documents/*.html
+documents/html_css
+documents/*.png
 data
