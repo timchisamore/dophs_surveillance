@@ -1,43 +1,61 @@
 plan <- drake_plan(
-  raw_om_iphis_data = reading_iphis_data(file_in(!!here::here("data", "raw", "om_surveillance_data.xlsx"))),
-  raw_std_iphis_data = reading_iphis_data(file_in(!!here::here("data", "raw", "std_surveillance_data.xlsx"))),
-  raw_tb_iphis_data = reading_iphis_data(file_in(!!here::here("data", "raw", "tb_surveillance_data.xlsx"))),
-  combined_iphis_data = combining_iphis_data(raw_om_iphis_data, raw_std_iphis_data, raw_tb_iphis_data),
-  clean_iphis_data = cleaning_iphis_data(combined_iphis_data),
-  yearly_and_monthly_counts = target(
-    counting_by_year_and_month(clean_iphis_data, disease_group = disease_groups),
+  raw_adjusted_diseases_data = reading_adjusted_diseases_data(file_in(!!here::here("data", "raw", "adjusted_diseases.csv"))),
+  raw_iphis_data = target(reading_iphis_data(iphis_data_path),
     transform = map(
-      disease_groups = c("bbis", "enterics", "respiratory", "stis", "vpds", "vbs"),
-      .names = c("bbi_counts", "enteric_counts", "respiratory_counts", "sti_counts", "vpd_counts", "vb_counts")
+      iphis_data_path = c(
+        file_in(!!here::here("data", "raw", "aids_report.xlsx")),
+        file_in(!!here::here("data", "raw", "cpe_report.xlsx")),
+        file_in(!!here::here("data", "raw", "hepatitis_b_chronic_report.xlsx")),
+        file_in(!!here::here("data", "raw", "hiv_report.xlsx")),
+        file_in(!!here::here("data", "raw", "om_report.xlsx")),
+        file_in(!!here::here("data", "raw", "sti_report.xlsx")),
+        file_in(!!here::here("data", "raw", "tb_report.xlsx")),
+        file_in(!!here::here("data", "raw", "tuberculosis_infection_latent_report.xlsx"))
+      ),
+      .names = c("raw_aids_data", "raw_cpe_data", "raw_hbv_chronic_data", "raw_hiv_data", "raw_om_data", "raw_sti_data", "raw_tb_data", "raw_ltbi_data")
     )
   ),
-  transformed_counts = target(
-    transforming_counts(yearly_and_monthly_counts),
+  combined_iphis_data = target(combining_iphis_data(raw_iphis_data),
+    transform = combine(raw_iphis_data)
+  ),
+  clean_adjusted_diseases_data = cleaning_adjusted_diseases_data(raw_adjusted_diseases_data),
+  clean_iphis_data = cleaning_iphis_data(combined_iphis_data, clean_adjusted_diseases_data),
+  filter_iphis_data = filtering_iphis_data(clean_iphis_data),
+  aggregate_cases_by_year_and_month = target(
+    aggregating_cases_by_year_and_month(filter_iphis_data, disease_group),
     transform = map(
-      yearly_and_monthly_counts,
-      .names = c("bbi_transformed_counts", "enteric_transformed_counts", "respiratory_transformed_counts", "sti_transformed_counts", "vpd_transformed_counts", "vb_transformed_counts")
+      filter_iphis_data,
+      disease_group = c("Enteric Diseases and Food-Borne Diseases", "Other", "Respiratory Diseases", "Sexually Transmitted Infections (STIs) and Blood Borne Infections (BBIs)", "Vaccine Preventable Diseases (VPDs)", "Vector-Borne and Zoonotic Diseases"),
+      .names = c("aggregate_enteric_data", "aggregate_other_data", "aggregate_resp_data", "aggregate_stbbi_data", "aggregate_vpd_data", "aggregate_vector_data")
     )
   ),
-  averaged_counts = target(
-    averaging_counts(yearly_and_monthly_counts),
+  transpose_aggregate_data_by_month = target(
+    transposing_aggregate_data_by_month(aggregate_cases_by_year_and_month),
     transform = map(
-      yearly_and_monthly_counts,
-      .names = c("bbi_averaged_counts", "enteric_averaged_counts", "respiratory_averaged_counts", "sti_averaged_counts", "vpd_averaged_counts", "vb_averaged_counts")
+      aggregate_cases_by_year_and_month,
+      .names = c("transpose_enteric_data", "transpose_other_data", "transpose_resp_data", "transpose_stbbi_data", "transpose_vpd_data", "transpose_vector_data")
     )
   ),
-  joined_counts = target(
-    joining_counts(transformed_counts, averaged_counts),
+  summarize_aggregate_data_by_year = target(
+    summarizing_aggregate_data_by_year(aggregate_cases_by_year_and_month),
     transform = map(
-      transformed_counts,
-      averaged_counts,
-      .names = c("bbi_joined_counts", "enteric_joined_counts", "respiratory_joined_counts", "sti_joined_counts", "vpd_joined_counts", "vb_joined_counts")
+      aggregate_cases_by_year_and_month,
+      .names = c("summarized_enteric_data", "summarized_other_data", "summarized_resp_data", "summarized_stbbi_data", "summarized_vpd_data", "summarized_vector_data")
     )
   ),
-  gt_tables = target(
-    gt_tables(joined_counts),
+  joined_transposed_and_summarized_data = target(
+    joining_transposed_and_summarized_data(transpose_aggregate_data_by_month, summarize_aggregate_data_by_year),
     transform = map(
-      joined_counts,
-      .names = c("bbi_gt_table", "enteric_gt_table", "respiratory_gt_table", "sti_gt_table", "vpd_gt_table", "vb_gt_table")
+      transpose_aggregate_data_by_month,
+      summarize_aggregate_data_by_year,
+      .names = c("joined_enteric_data", "joined_other_data", "joined_resp_data", "joined_stbbi_data", "joined_vpd_data", "joined_vector_data")
+    )
+  ),
+  create_gt_tables = target(
+    creating_gt_table(joined_transposed_and_summarized_data),
+    transform = map(
+      joined_transposed_and_summarized_data,
+      .names = c("enteric_table", "other_table", "resp_table", "stbbi_table", "vpd_table", "vector_table")
     )
   ),
   report = rmarkdown::render(

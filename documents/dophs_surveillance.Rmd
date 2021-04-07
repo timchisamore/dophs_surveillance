@@ -15,38 +15,39 @@ knitr::opts_chunk$set(
 
 # {.tabset .tabset-fade .tabset-pills}
 
-## Blood Borne Infections (BBIs)
-
-```{r bbi-diseases}
-drake::readd(bbi_gt_table)
-```
-
 ## Enteric Diseases and Food-Borne Diseases
 
-```{r enteric-and-food-borne-diseases}
-drake::readd(enteric_gt_table)
+```{r enteric-diseases-and-food-borne-diseases}
+drake::readd(enteric_table)
 ```
 
 ## Respiratory Diseases
 
 ```{r respiratory-diseases}
-drake::readd(respiratory_gt_table)
+drake::readd(resp_table)
 ```
 
-## Sexually Transmitted Infections (STIs)
+## Sexually Transmitted Infections (STIs) and Blood Borne Infections (BBIs)
 
-```{r sti-diseases}
-drake::readd(sti_gt_table)
+```{r sexually-transmitted-infections-and-blood-borne-infections}
+drake::readd(stbbi_table)
 ```
 
 ## Vaccine Preventable Diseases (VPDs)
 
-```{r vpd-diseases}
-drake::readd(vpd_gt_table)
+```{r vaccine-preventable-diseases}
+drake::readd(vpd_table)
 ```
 
 ## Vector-Borne and Zoonotic Diseases
 
 ```{r vector-borne-and-zoonotic-diseases}
-drake::readd(vb_gt_table)
+drake::readd(vector_table)
 ```
+
+## Other Diseases
+
+```{r other-diseases}
+drake::readd(other_table)
+```
+
