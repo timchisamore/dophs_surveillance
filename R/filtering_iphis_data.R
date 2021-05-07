@@ -1,13 +1,13 @@
-#' Filtering iPHIS Data
+#' Filtering iPHIS data
 #'
 #' This function takes the clean iPHIS data and filters to ensure only cases
 #' meeting defintion are included. For example, cases of chlamydial infections
 #' can have a classification of confirmed or probable while cases of hepatitis C
 #' must have a classification of confirmed.
 #'
-#' @param clean_iphis_data A `tbl_df` of clean iPHIS data.
+#' @param clean_iphis_data A tbl_df of clean iPHIS data.
 #'
-#' @return A `tbl_df` of filtered iPHIS data.
+#' @return A tbl_df of filtered iPHIS data.
 #' @export
 #'
 #' @examples
@@ -16,7 +16,7 @@ filtering_iphis_data <- function(clean_iphis_data) {
   # the PHO queries return observations of adjusted diseases that don't
   # necessarily meet case definition -- for example chickenpox with a
   # classification of PROBABLE
-  filter_iphis_data <- clean_iphis_data %>%
+  clean_iphis_data %>%
     filter(
       # this filters for adjusted diseases that only meet case definition with a
       # classification of CONFIRMED
@@ -50,5 +50,4 @@ filtering_iphis_data <- function(clean_iphis_data) {
         )
     )
   
-  return(filter_iphis_data)
 }
