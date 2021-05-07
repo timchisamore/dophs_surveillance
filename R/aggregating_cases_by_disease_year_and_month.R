@@ -1,5 +1,5 @@
 #' Aggregating cases by disease, year, and month
-#' 
+#'
 #' This function takes the clean iPHIS data and counts the number of cases by
 #' disease, year, and month. Note that we are using the padr package to
 #' properly cast data from dates to months and to fill in the gaps.
@@ -19,9 +19,11 @@ aggregating_cases_by_disease_year_and_month <- function(filter_iphis_data) {
       by = "date",
       start_val = lubridate::ymd("2005-01-01")
     ) %>%
-    count(date_month,
-          disease_group,
-          adjusted_disease) %>%
+    count(
+      date_month,
+      disease_group,
+      adjusted_disease
+    ) %>%
     # using an end value of the 20xx-12-01 where 20xx represents the current
     # year
     padr::pad(
@@ -33,8 +35,9 @@ aggregating_cases_by_disease_year_and_month <- function(filter_iphis_data) {
     ) %>%
     # filling the padded NA values with 0s
     padr::fill_by_value(n, value = 0) %>%
-    mutate(year = lubridate::year(date_month),
-           month = lubridate::month(date_month),
-           .before = 1)
-  
+    mutate(
+      year = lubridate::year(date_month),
+      month = lubridate::month(date_month),
+      .before = 1
+    )
 }

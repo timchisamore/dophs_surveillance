@@ -28,15 +28,14 @@ combining_iphis_data <-
            raw_ltbi_data) {
     # binding our data into a single tbl_df
     bind_rows(
-        raw_aids_data,
-        raw_cpe_data,
-        raw_hbv_chronic_data,
-        raw_hiv_data,
-        raw_om_data,
-        raw_sti_data,
-        raw_tb_data,
-        raw_ltbi_data,
-        .id = "source"
-      )
-
+      raw_aids_data,
+      raw_cpe_data,
+      raw_hbv_chronic_data,
+      raw_hiv_data,
+      raw_om_data,
+      raw_sti_data,
+      raw_tb_data,
+      raw_ltbi_data,
+      .id = "source"
+    )
   }

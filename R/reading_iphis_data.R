@@ -28,5 +28,4 @@ reading_iphis_data <- function(iphis_data_path) {
       "text"
     )
   )
-  
 }

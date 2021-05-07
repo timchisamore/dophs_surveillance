@@ -49,5 +49,4 @@ filtering_iphis_data <- function(clean_iphis_data) {
             classification %in% c("CONFIRMED", "PROBABLE", "SUSPECT CASE")
         )
     )
-  
 }

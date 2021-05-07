@@ -1,17 +1,17 @@
-#' Getting Diseases Confirmed
-#' 
+#' Gettingdiseases confirmed
+#'
 #' This function returns a character vector of the iPHIS diseases with a case
 #' definition of classification = "CONFIRMED". This function will be used in the
-#' `filtering_iphis_data` function.
+#' filtering_iphis_data function.
 #'
-#' @return A `character` vector of diseases with a case definition of
+#' @return A character vector of diseases with a case definition of
 #' classification = "CONFIRMED".
 #' @export
 #'
 #' @examples
 #' `getting_diseases_confirmed()`
 getting_diseases_confirmed <- function() {
-  get_diseases_confirmed <- c(
+  c(
     "Acute Flaccid Paralysis",
     "Adverse Vaccine Event",
     "AIDS",
@@ -30,6 +30,4 @@ getting_diseases_confirmed <- function() {
     "Tetanus",
     "Tuberculosis infection, Latent"
   )
-  
-  return(get_diseases_confirmed)
 }

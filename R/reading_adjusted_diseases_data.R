@@ -13,12 +13,13 @@
 #' `reading_adjusted_diseases_data(here::here("data", "raw", "adjusted_diseases.csv"))`
 reading_adjusted_diseases_data <- function(adjusted_diseases_data_path) {
   # reading the raw data in
-  read_csv(file = adjusted_diseases_data_path,
-           col_names = TRUE,
-           col_types = cols(
-             disease = col_character(),
-             adjusted_disease = col_character(),
-             disease_group = col_character()
-           ))
-  
+  read_csv(
+    file = adjusted_diseases_data_path,
+    col_names = TRUE,
+    col_types = cols(
+      disease = col_character(),
+      adjusted_disease = col_character(),
+      disease_group = col_character()
+    )
+  )
 }

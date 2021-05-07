@@ -1,5 +1,5 @@
 #' Creating monthly table
-#' 
+#'
 #' This function takes monthly table data and used the gt package to create a
 #' table. The adjusted disease, monthly counts, and summary statistics are
 #' shown.
@@ -46,5 +46,4 @@ creating_monthly_table <- function(create_monthly_table_data,
     opt_row_striping(row_striping = TRUE) %>%
     tab_stubhead(label = "Disease") %>%
     tab_options(table.width = "100%")
-  
 }

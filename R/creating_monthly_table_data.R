@@ -1,5 +1,5 @@
 #' Creating monthly table data
-#' 
+#'
 #' This function takes the transposed aggregate case data and the
 #' summarised aggregate case data and filters it for a specific year and month.
 #' Any year in the future will produce an error. This data is then joined by
@@ -18,24 +18,26 @@
 #' @examples
 #' `creating_monthly_table_data(transposed_aggregate_case_data, summarised_aggregate_case_data)`
 creating_monthly_table_data <- function(transposed_aggregate_case_data,
-                                   summarised_aggregate_case_data,
-                                   report_year = lubridate::year(lubridate::today()),
-                                   report_month = lubridate::month(lubridate::today())) {
+                                        summarised_aggregate_case_data,
+                                        report_year = lubridate::year(lubridate::today()),
+                                        report_month = lubridate::month(lubridate::today())) {
   # we cannot calculate values for future years
   stopifnot("The year must not be in the future!" = report_year <= lubridate::year(lubridate::today()))
-  
+
   # filtering our transposed aggregate data for the supplied year
   filter_transposed_data <- transposed_aggregate_case_data %>%
     filter(year == report_year)
-  
+
   # filtering our summarised data for the supplied year and month minus one
   filter_summarised_data <- summarised_aggregate_case_data %>%
-    filter(year == report_year,
-           month == (report_month - 1))
-  
+    filter(
+      year == report_year,
+      month == (report_month - 1)
+    )
+
   # joining the transposed and summarised data by year and adjusted disease
   filter_transposed_data %>%
     left_join(filter_summarised_data,
-              by = c("year", "adjusted_disease"))
-  
+      by = c("year", "adjusted_disease")
+    )
 }

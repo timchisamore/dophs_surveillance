@@ -26,17 +26,18 @@ plan <- drake_plan(
   transposed_aggregate_case_data = transposing_aggregate_case_data(aggregate_cases_by_disease_year_and_month),
   create_monthly_table_data = creating_monthly_table_data(transposed_aggregate_case_data, summarised_aggregate_case_data),
   create_monthly_tables = target(creating_monthly_table(create_monthly_table_data, group),
-                                 transform = map(
-                                   group = c(
-                                     "Enteric Diseases and Food-Borne Diseases",
-                                     "Respiratory Diseases",
-                                     "Sexually Transmitted Infections (STIs) and Blood Borne Infections (BBIs)",
-                                     "Vaccine Preventable Diseases (VPDs)",
-                                     "Vector-Borne and Zoonotic Diseases",
-                                     "Other"
-                                   ),
-                                   .names = c("enteric_monthly_table", "resp_monthly_table", "sti_monthly_table", "vpd_monthly_table", "vbz_monthly_table", "other_monthly_table")
-                                 )),
+    transform = map(
+      group = c(
+        "Enteric Diseases and Food-Borne Diseases",
+        "Respiratory Diseases",
+        "Sexually Transmitted Infections (STIs) and Blood Borne Infections (BBIs)",
+        "Vaccine Preventable Diseases (VPDs)",
+        "Vector-Borne and Zoonotic Diseases",
+        "Other"
+      ),
+      .names = c("enteric_monthly_table", "resp_monthly_table", "sti_monthly_table", "vpd_monthly_table", "vbz_monthly_table", "other_monthly_table")
+    )
+  ),
   report = rmarkdown::render(
     input = knitr_in(!!here::here("documents", "dophs_surveillance.Rmd")),
     output_file = file_out(!!here::here("documents", "dophs_surveillance.html"))

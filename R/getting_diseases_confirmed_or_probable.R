@@ -1,17 +1,17 @@
-#' Getting Diseases Confirmed or Probable
+#' Getting diseases confirmed or probable
 #'
 #' This function returns a character vector of the iPHIS diseases with a case
 #' definition of classification in ("CONFIRMED", "PROBABLE"). This function will
-#' be used in the `filtering_iphis_data` function.
+#' be used in the filtering_iphis_data function.
 #'
-#' @return A `character` vector of diseases with a case definition of
+#' @return A character vector of diseases with a case definition of
 #' classification in ("CONFIRMED", "PROBABLE").
 #' @export
 #'
 #' @examples
 #' `getting_diseases_confirmed_or_probable()`
 getting_diseases_confirmed_or_probable <- function() {
-  get_diseases_confirmed_or_probable <- c(
+  c(
     "Amebiasis",
     "Blastomycosis",
     "Brucellosis",
@@ -58,6 +58,4 @@ getting_diseases_confirmed_or_probable <- function() {
     "West Nile Virus Illness",
     "Yersiniosis"
   )
-  
-  return(get_diseases_confirmed_or_probable)
 }

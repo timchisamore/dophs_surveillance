@@ -27,5 +27,4 @@ cleaning_iphis_data <- function(combined_iphis_data, clean_adjusted_diseases_dat
     left_join(clean_adjusted_diseases_data,
       by = "disease"
     )
-
 }

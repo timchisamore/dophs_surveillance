@@ -13,5 +13,4 @@
 cleaning_adjusted_diseases_data <- function(raw_adjusted_diseases_data) {
   raw_adjusted_diseases_data %>%
     janitor::clean_names()
-  
 }

@@ -1,5 +1,5 @@
 #' Transposing aggregate case data
-#' 
+#'
 #' This function takes the aggregate case data and transposes it so that the
 #' months are columns.
 #'
@@ -14,7 +14,8 @@
 transposing_aggregate_case_data <- function(aggregate_cases_by_disease_year_and_month) {
   aggregate_cases_by_disease_year_and_month %>%
     select(-date_month) %>%
-    pivot_wider(names_from = month,
-                values_from = n)
-  
+    pivot_wider(
+      names_from = month,
+      values_from = n
+    )
 }
