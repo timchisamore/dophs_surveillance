@@ -24,8 +24,8 @@ plan <- drake_plan(
   aggregate_cases_by_disease_year_and_month = aggregating_cases_by_disease_year_and_month(filter_iphis_data),
   summarised_aggregate_case_data = summarising_aggregate_case_data(aggregate_cases_by_disease_year_and_month),
   transposed_aggregate_case_data = transposing_aggregate_case_data(aggregate_cases_by_disease_year_and_month),
-  create_monthly_table_data = creating_monthly_table_data(transposed_aggregate_case_data, summarised_aggregate_case_data),
-  create_monthly_tables = target(creating_monthly_table(create_monthly_table_data, group),
+  create_monthly_data = creating_monthly_data(transposed_aggregate_case_data, summarised_aggregate_case_data),
+  create_monthly_tables = target(creating_monthly_table(create_monthly_data, group),
     transform = map(
       group = c(
         "Enteric Diseases and Food-Borne Diseases",

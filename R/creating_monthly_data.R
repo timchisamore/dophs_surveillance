@@ -1,4 +1,4 @@
-#' Creating monthly table data
+#' Creating monthly data
 #'
 #' This function takes the transposed aggregate case data and the
 #' summarised aggregate case data and filters it for a specific year and month.
@@ -12,12 +12,12 @@
 #' @param report_year A numeric year for the report.
 #' @param report_month A numeric month for the report.
 #'
-#' @return A tbl_df of monthly table data.
+#' @return A tbl_df of monthly data.
 #' @export
 #'
 #' @examples
 #' `creating_monthly_table_data(transposed_aggregate_case_data, summarised_aggregate_case_data)`
-creating_monthly_table_data <- function(transposed_aggregate_case_data,
+creating_monthly_data <- function(transposed_aggregate_case_data,
                                         summarised_aggregate_case_data,
                                         report_year = lubridate::year(lubridate::today()),
                                         report_month = lubridate::month(lubridate::today())) {

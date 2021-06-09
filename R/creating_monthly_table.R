@@ -4,17 +4,17 @@
 #' table. The adjusted disease, monthly counts, and summary statistics are
 #' shown.
 #'
-#' @param create_monthly_table_data A tbl_df of monthly table data.
+#' @param create_monthly_data A tbl_df of monthly data.
 #' @param group A character indicating the disease group.
 #'
 #' @return A gt table of monthly data.
 #' @export
 #'
 #' @examples
-#' `creating_monthly_table(create_monthly_table_data)`
-creating_monthly_table <- function(create_monthly_table_data,
+#' `creating_monthly_table(create_monthly_data)`
+creating_monthly_table <- function(create_monthly_data,
                                    group) {
-  create_monthly_table_data %>%
+  create_monthly_data %>%
     filter(disease_group == group) %>%
     gt(rowname_col = "adjusted_disease") %>%
     cols_label(
