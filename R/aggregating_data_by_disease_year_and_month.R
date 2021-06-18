@@ -1,4 +1,4 @@
-#' Aggregating cases by disease, year, and month
+#' Aggregating data by disease, year, and month
 #'
 #' This function takes the clean iPHIS data and counts the number of cases by
 #' disease, year, and month. Note that we are using the padr package to
@@ -10,8 +10,8 @@
 #' @export
 #'
 #' @examples
-#' `aggregating_cases_by_disease_year_and_month(filter_iphis_data)`
-aggregating_cases_by_disease_year_and_month <- function(filter_iphis_data) {
+#' `aggregating_data_by_disease_year_and_month(filter_iphis_data)`
+aggregating_data_by_disease_year_and_month <- function(filter_iphis_data) {
   filter_iphis_data %>%
     # using a YYYY-mm-01 value to represent months and starting at 2005-01-01
     padr::thicken(

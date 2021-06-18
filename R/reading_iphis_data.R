@@ -23,8 +23,8 @@ reading_iphis_data <- function(iphis_data_path) {
       "text",
       "text",
       "date",
-      "numeric",
-      "numeric",
+      "text",
+      "text",
       "text"
     )
   )

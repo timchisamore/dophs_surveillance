@@ -1,19 +1,19 @@
-#' Summarising aggregate case data
+#' Summarising aggregate data
 #'
 #' This function takes the aggregated cases by disease, year, and month and
 #' produces 5-year averages, 5-year minimums, and 5-year maximums for the year
 #' to date values.
 #'
-#' @param aggregate_cases_by_disease_year_and_month A tbl_df of aggregate case
-#' date.
+#' @param aggregate_data_by_disease_year_and_month A tbl_df of aggregate case
+#' data.
 #'
 #' @return A tbl_df of summarised aggregate case data.
 #' @export
 #'
 #' @examples
-#' `summarising_aggregate_case_data(aggregate_cases_by_disease_year_and_month)`
-summarising_aggregate_case_data <- function(aggregate_cases_by_disease_year_and_month) {
-  aggregate_cases_by_disease_year_and_month %>%
+#' `summarising_aggregate_data(aggregate_data_by_disease_year_and_month)`
+summarising_aggregate_data <- function(aggregate_data_by_disease_year_and_month) {
+  aggregate_data_by_disease_year_and_month %>%
     group_by(
       adjusted_disease,
       year

@@ -5,10 +5,8 @@
 #' Any year in the future will produce an error. This data is then joined by
 #' year and adjusted disease.
 #'
-#' @param transposed_aggregate_case_data A tbl_df of transposed aggregate case
-#' data.
-#' @param summarised_aggregate_case_data A tbl_df of summarised aggregate case
-#' data.
+#' @param transposed_aggregate_data A tbl_df of transposed aggregate case data.
+#' @param summarised_aggregate_data A tbl_df of summarised aggregate case data.
 #' @param report_year A numeric year for the report.
 #' @param report_month A numeric month for the report.
 #'
@@ -16,20 +14,20 @@
 #' @export
 #'
 #' @examples
-#' `creating_monthly_table_data(transposed_aggregate_case_data, summarised_aggregate_case_data)`
-creating_monthly_data <- function(transposed_aggregate_case_data,
-                                        summarised_aggregate_case_data,
+#' `creating_monthly_table_data(transposed_aggregate_data, summarised_aggregate_data)`
+creating_monthly_data <- function(transposed_aggregate_data,
+                                        summarised_aggregate_data,
                                         report_year = lubridate::year(lubridate::today()),
                                         report_month = lubridate::month(lubridate::today())) {
   # we cannot calculate values for future years
   stopifnot("The year must not be in the future!" = report_year <= lubridate::year(lubridate::today()))
 
   # filtering our transposed aggregate data for the supplied year
-  filter_transposed_data <- transposed_aggregate_case_data %>%
+  filter_transposed_data <- transposed_aggregate_data %>%
     filter(year == report_year)
 
   # filtering our summarised data for the supplied year and month minus one
-  filter_summarised_data <- summarised_aggregate_case_data %>%
+  filter_summarised_data <- summarised_aggregate_data %>%
     filter(
       year == report_year,
       month == (report_month - 1)

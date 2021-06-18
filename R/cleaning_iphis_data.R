@@ -22,7 +22,8 @@ cleaning_iphis_data <- function(combined_iphis_data, clean_adjusted_diseases_dat
       gender = as_factor(gender),
       classification = as_factor(classification),
       date = lubridate::parse_date_time(date, orders = c("%Y-%m-%d %H:%M:%S", "%Y-%m-%d")),
-      date = lubridate::as_date(date)
+      date = lubridate::as_date(date),
+      count = parse_double(count)
     ) %>%
     left_join(clean_adjusted_diseases_data,
       by = "disease"

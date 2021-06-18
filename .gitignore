@@ -2,12 +2,7 @@
 .Rhistory
 .RData
 .Ruserdata
-.drake
-.drake_history
-_drake.R
-miscellaneous
+_targets
 archive
-documents/*.html
-documents/html_css
-documents/*.png
 data
+documents

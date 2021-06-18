@@ -18,36 +18,35 @@ knitr::opts_chunk$set(
 ## Enteric Diseases and Food-Borne Diseases
 
 ```{r enteric-diseases-and-food-borne-diseases}
-drake::readd(enteric_monthly_table)
+targets::tar_read(create_enteric_monthly_table)
 ```
 
 ## Respiratory Diseases
 
 ```{r respiratory-diseases}
-drake::readd(resp_monthly_table)
+targets::tar_read(create_resp_monthly_table)
 ```
 
 ## Sexually Transmitted Infections (STIs) and Blood Borne Infections (BBIs)
 
 ```{r sexually-transmitted-infections-and-blood-borne-infections}
-drake::readd(sti_monthly_table)
+targets::tar_read(create_sti_monthly_table)
 ```
 
 ## Vaccine Preventable Diseases (VPDs)
 
 ```{r vaccine-preventable-diseases}
-drake::readd(vpd_monthly_table)
+targets::tar_read(create_vpd_monthly_table)
 ```
 
 ## Vector-Borne and Zoonotic Diseases
 
 ```{r vector-borne-and-zoonotic-diseases}
-drake::readd(vbz_monthly_table)
+targets::tar_read(create_vbz_monthly_table)
 ```
 
 ## Other Diseases
 
 ```{r other-diseases}
-drake::readd(other_monthly_table)
+targets::tar_read(create_other_monthly_table)
 ```
-
