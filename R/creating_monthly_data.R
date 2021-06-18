@@ -16,9 +16,9 @@
 #' @examples
 #' `creating_monthly_table_data(transposed_aggregate_data, summarised_aggregate_data)`
 creating_monthly_data <- function(transposed_aggregate_data,
-                                        summarised_aggregate_data,
-                                        report_year = lubridate::year(lubridate::today()),
-                                        report_month = lubridate::month(lubridate::today())) {
+                                  summarised_aggregate_data,
+                                  report_year = lubridate::year(lubridate::today()),
+                                  report_month = lubridate::month(lubridate::today())) {
   # we cannot calculate values for future years
   stopifnot("The year must not be in the future!" = report_year <= lubridate::year(lubridate::today()))
 
